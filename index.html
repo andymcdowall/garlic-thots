@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garlic Thots — Pizzeria Strip Club, Brooklyn NY</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Alfa+Slab+One&family=Oswald:wght@400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400;1,600&display=swap');
+
+    :root {
+      --cream: #F5F0E1;
+      --cream-dark: #EDE6D3;
+      --red: #C41E3A;
+      --red-dark: #8B0016;
+      --gold: #B8860B;
+      --brown: #5C3A1A;
+      --text: #1A0804;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--cream);
+      color: var(--text);
+      font-family: 'Lora', Georgia, serif;
+      overflow-x: hidden;
+    }
+
+    /* Grain overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Checkered stripe */
+    .checker {
+      height: 22px;
+      background-image:
+        linear-gradient(45deg, var(--red) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--red) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--red) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--red) 75%);
+      background-size: 22px 22px;
+      background-position: 0 0, 0 11px, 11px -11px, -11px 0px;
+      background-color: white;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--red);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 2rem;
+      border-bottom: 4px solid var(--red-dark);
+    }
+
+    .nav-logo {
+      font-family: 'Bangers', cursive;
+      color: white;
+      font-size: 1.5rem;
+      letter-spacing: 0.1em;
+      padding: 0.85rem 0;
+      text-decoration: none;
+    }
+    .nav-logo span { color: #FFD700; }
+
+    nav ul { list-style: none; display: flex; }
+    nav ul li a {
+      color: white;
+      text-decoration: none;
+      font-family: 'Oswald', sans-serif;
+      font-weight: 500;
+      font-size: 0.82rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1.2rem 1rem;
+      display: block;
+      transition: background 0.15s, color 0.15s;
+    }
+    nav ul li a:hover { background: var(--red-dark); color: #FFD700; }
+
+    /* ===== HERO ===== */
+    .hero {
+      padding: 2.5rem 1.5rem 3rem;
+      background: var(--cream);
+    }
+
+    .hero-frame {
+      border: 5px solid var(--red);
+      max-width: 1020px;
+      margin: 0 auto;
+      box-shadow: 6px 6px 0 var(--red-dark);
+    }
+
+    .hero-inner {
+      padding: 2.5rem 3rem;
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .hero-mascot {
+      flex-shrink: 0;
+      width: 210px;
+    }
+    .hero-mascot img {
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      transform-origin: bottom center;
+      display: block;
+      /* Turn black SVG into brand red (#C41E3A) */
+      filter: invert(15%) sepia(90%) saturate(3500%) hue-rotate(330deg) brightness(85%);
+    }
+    .hero-mascot img:hover {
+      animation: wobble 0.6s ease-in-out;
+    }
+    @keyframes wobble {
+      0%   { transform: rotate(0deg) scale(1); }
+      18%  { transform: rotate(-5deg) scale(1.05); }
+      36%  { transform: rotate(5deg) scale(1.05); }
+      54%  { transform: rotate(-3deg) scale(1.02); }
+      72%  { transform: rotate(3deg) scale(1.02); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+
+    .hero-text {
+      flex: 1;
+      text-align: center;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.38em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .hero-title {
+      font-family: 'Bangers', cursive;
+      font-size: clamp(3.5rem, 10vw, 7.5rem);
+      color: var(--red);
+      line-height: 0.88;
+      margin-bottom: 0.6rem;
+      text-shadow: 4px 4px 0 rgba(139,0,22,0.3);
+      letter-spacing: 0.06em;
+    }
+
+    .hero-flanks {
+      display: flex;
+      justify-content: center;
+      gap: 2.5rem;
+      margin-bottom: 0.75rem;
+      align-items: center;
+    }
+    .hero-flank {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-align: center;
+      line-height: 1.4;
+    }
+    .hero-flank-divider {
+      color: var(--red);
+      font-size: 1.8rem;
+    }
+
+    .hero-tagline {
+      font-family: 'Alfa Slab One', serif;
+      font-size: clamp(1rem, 2.8vw, 1.5rem);
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-top: 2px solid var(--red);
+      border-bottom: 2px solid var(--red);
+      padding: 0.45rem 0;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      font-family: 'Alfa Slab One', serif;
+      font-size: 1rem;
+      letter-spacing: 0.18em;
+      padding: 0.4rem 1.5rem;
+      border: 3px solid var(--red-dark);
+      margin-bottom: 1.5rem;
+      transform: rotate(-2deg);
+      box-shadow: 3px 3px 0 var(--red-dark);
+    }
+
+    .hero-info {
+      font-family: 'Oswald', sans-serif;
+      color: var(--text);
+      font-size: 0.88rem;
+      letter-spacing: 0.08em;
+      line-height: 1.75;
+    }
+    .hero-info .phone {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--red);
+      display: block;
+      margin-top: 0.2rem;
+    }
+
+    /* ===== DIT OET TW BANNER ===== */
+    .dit-banner {
+      background: var(--text);
+      color: white;
+      text-align: center;
+      padding: 1rem 2rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+    .dit-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .dit-icon {
+      font-size: 1.2em;
+    }
+    .dit-divider {
+      width: 6px;
+      height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    /* ===== SECTIONS ===== */
+    section {
+      padding: 4rem 1.5rem;
+    }
+    section:nth-of-type(even) {
+      background: var(--cream-dark);
+    }
+
+    .section-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-eyebrow {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      color: var(--red);
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Alfa Slab One', serif;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      color: var(--red);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+    }
+    .ornament {
+      color: var(--red);
+      font-size: 1.2rem;
+      letter-spacing: 0.6rem;
+      display: block;
+      margin: 0.6rem 0;
+    }
+    .section-subtitle {
+      font-style: italic;
+      color: var(--brown);
+      font-size: 0.95rem;
+    }
+
+    /* ===== MENU ===== */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .menu-item {
+      border: 2px solid var(--red);
+      background: var(--cream);
+      padding: 1.2rem 1.4rem;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .menu-item::after {
+      content: '';
+      position: absolute;
+      top: 4px; left: 4px; right: -4px; bottom: -4px;
+      border: 2px solid var(--red);
+      z-index: -1;
+      transition: all 0.2s;
+    }
+    .menu-item:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: 7px 7px 0 var(--red);
+    }
+
+    .menu-tag {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: white;
+      background: var(--red);
+      padding: 0.1rem 0.55rem;
+      display: inline-block;
+      margin-bottom: 0.5rem;
+    }
+    .menu-tag.gold { background: var(--gold); }
+
+    .menu-name {
+      font-family: 'Alfa Slab One', serif;
+      font-size: 1.25rem;
+      color: var(--red);
+      margin-bottom: 0.35rem;
+      line-height: 1.1;
+    }
+    .menu-desc {
+      font-size: 0.84rem;
+      font-style: italic;
+      color: var(--text);
+      margin-bottom: 0.8rem;
+      line-height: 1.55;
+    }
+    .menu-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-top: 1px dashed var(--red);
+      padding-top: 0.5rem;
+    }
+    .menu-price {
+      font-family: 'Alfa Slab One', serif;
+      font-size: 1.4rem;
+      color: var(--red);
+    }
+    .menu-size {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--brown);
+      text-transform: uppercase;
+    }
+
+    /* ===== ABOUT ===== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .about-text p {
+      line-height: 1.85;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+    .about-text strong { color: var(--red); }
+
+    .house-rules {
+      background: var(--red);
+      color: white;
+      padding: 2rem;
+    }
+    .house-rules h3 {
+      font-family: 'Alfa Slab One', serif;
+      font-size: 1.4rem;
+      text-align: center;
+      letter-spacing: 0.08em;
+      border-bottom: 2px solid rgba(255,255,255,0.35);
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .house-rules ul { list-style: none; }
+    .house-rules li {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      padding: 0.55rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.18);
+      display: flex;
+      gap: 0.7rem;
+      align-items: flex-start;
+    }
+    .house-rules li::before {
+      content: '★';
+      color: #FFD700;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ===== ENTERTAINERS ===== */
+    .entertainers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+      gap: 1.5rem;
+    }
+    .entertainer-card {
+      border: 3px solid var(--red);
+      background: var(--cream);
+      text-align: center;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .entertainer-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 0 var(--red);
+    }
+    .entertainer-avatar {
+      background: var(--red);
+      height: 110px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3.5rem;
+    }
+    .entertainer-body { padding: 1.25rem; }
+    .entertainer-name {
+      font-family: 'Alfa Slab One', serif;
+      font-size: 1rem;
+      color: var(--red);
+      margin-bottom: 0.2rem;
+      line-height: 1.2;
+    }
+    .entertainer-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-bottom: 0.75rem;
+    }
+    .entertainer-bio {
+      font-size: 0.83rem;
+      font-style: italic;
+      line-height: 1.55;
+      color: var(--text);
+    }
+    .entertainer-specialty {
+      margin-top: 0.75rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: var(--red);
+      color: white;
+      padding: 0.25rem 0.6rem;
+      display: inline-block;
+    }
+
+    /* ===== HOURS ===== */
+    .hours-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+    .hours-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Oswald', sans-serif;
+    }
+    .hours-table th {
+      background: var(--red);
+      color: white;
+      padding: 0.7rem 1rem;
+      text-align: left;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .hours-table td {
+      padding: 0.6rem 1rem;
+      border-bottom: 1px solid rgba(196,30,58,0.18);
+      font-size: 0.92rem;
+    }
+    .hours-table tr:nth-child(even) td { background: rgba(196,30,58,0.05); }
+    .hours-table .day { font-weight: 600; }
+    .hours-table .time { color: var(--red); }
+    .hours-table .closed { color: var(--brown); font-style: italic; }
+
+    .address-block {
+      margin-top: 1.5rem;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      line-height: 1.9;
+    }
+    .address-block strong { color: var(--red); }
+
+    /* Hand-drawn map */
+    .map-box {
+      border: 3px solid var(--red);
+      background: #E4DFD1;
+      height: 265px;
+      position: relative;
+      overflow: hidden;
+    }
+    .map-box::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(transparent 28%, rgba(196,30,58,0.22) 28%, rgba(196,30,58,0.22) 31%, transparent 31%),
+        linear-gradient(transparent 56%, rgba(196,30,58,0.22) 56%, rgba(196,30,58,0.22) 59%, transparent 59%),
+        linear-gradient(transparent 78%, rgba(196,30,58,0.22) 78%, rgba(196,30,58,0.22) 81%, transparent 81%),
+        linear-gradient(90deg, transparent 22%, rgba(196,30,58,0.22) 22%, rgba(196,30,58,0.22) 25%, transparent 25%),
+        linear-gradient(90deg, transparent 52%, rgba(196,30,58,0.22) 52%, rgba(196,30,58,0.22) 55%, transparent 55%),
+        linear-gradient(90deg, transparent 76%, rgba(196,30,58,0.22) 76%, rgba(196,30,58,0.22) 79%, transparent 79%);
+    }
+    .map-center {
+      position: absolute;
+      top: 50%;
+      left: 42%;
+      transform: translate(-50%, -60%);
+      text-align: center;
+    }
+    .map-pin {
+      font-size: 2.2rem;
+      display: block;
+      animation: pinBounce 1.6s ease-in-out infinite;
+      filter: drop-shadow(0 4px 3px rgba(0,0,0,0.3));
+    }
+    @keyframes pinBounce {
+      0%, 100% { transform: translateY(0); }
+      50%       { transform: translateY(-10px); }
+    }
+    .map-label {
+      background: var(--red);
+      color: white;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.65rem;
+      letter-spacing: 0.1em;
+      padding: 0.2rem 0.5rem;
+      text-transform: uppercase;
+      white-space: nowrap;
+      display: inline-block;
+      margin-top: 2px;
+    }
+    .street-labels {
+      position: absolute;
+      inset: 0;
+      font-family: 'Oswald', sans-serif;
+      font-size: 0.58rem;
+      letter-spacing: 0.05em;
+      color: var(--brown);
+      text-transform: uppercase;
+    }
+    .street-labels span { position: absolute; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--text);
+      color: rgba(255,255,255,0.65);
+      text-align: center;
+      padding: 0 2rem 2.5rem;
+      font-family: 'Oswald', sans-serif;
+    }
+    .footer-checker {
+      height: 20px;
+      background-image:
+        linear-gradient(45deg, var(--red) 25%, transparent 25%),
+        linear-gradient(-45deg, var(--red) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, var(--red) 75%),
+        linear-gradient(-45deg, transparent 75%, var(--red) 75%);
+      background-size: 20px 20px;
+      background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+      background-color: #2a0a0a;
+      margin-bottom: 2rem;
+    }
+    .footer-logo {
+      font-family: 'Bangers', cursive;
+      font-size: 2.6rem;
+      color: white;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.1rem;
+    }
+    .footer-tagline {
+      font-size: 0.72rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 2rem;
+    }
+    .footer-disclaimers {
+      font-size: 0.7rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      line-height: 2.1;
+      color: rgba(255,255,255,0.32);
+      border-top: 1px solid rgba(255,255,255,0.1);
+      padding-top: 1.5rem;
+    }
+    .footer-disclaimers p { margin-bottom: 0.15rem; }
+    .footer-copy {
+      margin-top: 1.25rem;
+      font-size: 0.62rem;
+      color: rgba(255,255,255,0.16);
+      letter-spacing: 0.04em;
+      text-transform: none;
+    }
+
+    /* ===== SCROLL FADE ===== */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .hero-inner {
+        flex-direction: column;
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+      }
+      .hero-mascot {
+        width: 160px;
+        order: -1;
+      }
+      nav ul { display: none; }
+      .about-grid, .hours-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .entertainers-grid { grid-template-columns: repeat(2, 1fr); }
+      .dit-banner { gap: 0.75rem; font-size: 0.85rem; }
+    }
+    @media (max-width: 480px) {
+      .entertainers-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">Garlic <span>Thots</span></a>
+  <ul>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#entertainers">The Staff</a></li>
+    <li><a href="#hours">Hours</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-frame">
+    <div class="checker"></div>
+    <div class="hero-inner">
+
+      <!-- MASCOT -->
+      <div class="hero-mascot">
+        <img src="./pizza_pole_icon_black.svg" alt="Garlic Thots mascot: pole dancer on a pizza slice"/>
+      </div>
+
+      <!-- Hero Text -->
+      <div class="hero-text">
+        <p class="hero-eyebrow">Est. 1980 &bull; Chicago, IL</p>
+        <h1 class="hero-title">GARLIC<br>THOTS</h1>
+
+        <div class="hero-flanks">
+          <span class="hero-flank">HOT<br>&amp; OILY</span>
+          <span class="hero-flank-divider">🍕</span>
+          <span class="hero-flank">HOME OF THE<br>THICK SLICE</span>
+        </div>
+
+        <p class="hero-tagline">Pizzeria Strip Club</p>
+        <div class="hero-badge">OPEN NIGHTLY</div>
+        <div class="hero-info">
+          <p>69 Mozzarella Ave &bull; Chicago, IL 60601</p>
+          <span class="phone">Call me 💋 555-THOTS</span>
+        </div>
+      </div>
+
+    </div>
+    <div class="checker"></div>
+  </div>
+</section>
+
+<!-- DINE IN · EAT OUT · TIP WELL banner -->
+<div class="dit-banner">
+  <span class="dit-item"><span class="dit-icon">🍕</span> DINE IN</span>
+  <span class="dit-divider"></span>
+  <span class="dit-item"><span class="dit-icon">💋</span> EAT OUT</span>
+  <span class="dit-divider"></span>
+  <span class="dit-item"><span class="dit-icon">💵</span> TIP WELL</span>
+</div>
+
+<div class="checker"></div>
+
+<!-- MENU -->
+<section id="menu">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">Curated for the discerning appetite</p>
+      <h2 class="section-title">TONIGHT'S SPECIALS</h2>
+      <span class="ornament">✦ ✦ ✦</span>
+      <p class="section-subtitle">All pies hand-tossed nightly. Hot &amp; oily, every time. You'll want to come every night.</p>
+    </div>
+    <div class="menu-grid">
+
+      <div class="menu-item fade-in">
+        <span class="menu-tag">Fan Favorite</span>
+        <h3 class="menu-name">The Full Exposure</h3>
+        <p class="menu-desc">Everything, laid out on full display. All toppings. Nothing held back. Nothing left to the imagination.</p>
+        <div class="menu-footer">
+          <span class="menu-price">$22.99</span>
+          <span class="menu-size">18" · Feeds 2–4</span>
+        </div>
+      </div>
+
+      <div class="menu-item fade-in">
+        <span class="menu-tag">Appetizer</span>
+        <h3 class="menu-name">Knot a Lap Dance</h3>
+        <p class="menu-desc">A dozen of our signature knots, slicked with roasted garlic butter. Close. Personal. You'll be thinking about it tomorrow.</p>
+        <div class="menu-footer">
+          <span class="menu-price">$8.99</span>
+          <span class="menu-size">12 pieces</span>
+        </div>
+      </div>
+
+      <div class="menu-item fade-in">
+        <span class="menu-tag">Specialty</span>
+        <h3 class="menu-name">The Tease</h3>
+        <p class="menu-desc">Half-baked. You take her home and finish her yourself. You'll love what you make of it.</p>
+        <div class="menu-footer">
+          <span class="menu-price">$14.99</span>
+          <span class="menu-size">14" · Take &amp; Bake</span>
+        </div>
+      </div>
+
+      <div class="menu-item fade-in">
+        <span class="menu-tag">Party Pack</span>
+        <h3 class="menu-name">The Sausage Party</h3>
+        <p class="menu-desc">Loaded with hot Italian sausage. Easily fills 6 people. Private room strongly recommended.</p>
+        <div class="menu-footer">
+          <span class="menu-price">$34.99</span>
+          <span class="menu-size">20" · Feeds 6+</span>
+        </div>
+      </div>
+
+      <div class="menu-item fade-in">
+        <span class="menu-tag gold">★ VIP Only</span>
+        <h3 class="menu-name">The VIP Pie</h3>
+        <p class="menu-desc">Truffle oil, prosciutto crudo, arugula, shaved parmigiano. For discerning guests. Requires $40 bar spend or valid membership card.</p>
+        <div class="menu-footer">
+          <span class="menu-price">$38.99</span>
+          <span class="menu-size">12" · Limited nightly</span>
+        </div>
+      </div>
+
+      <div class="menu-item fade-in">
+        <span class="menu-tag">Wet Special</span>
+        <h3 class="menu-name">Wet &amp; Wild Marinara</h3>
+        <p class="menu-desc">Double marinara with extra sauce. She is dripping, so bring a towel to clean up after.</p>
+        <div class="menu-footer">
+          <span class="menu-price">$19.99</span>
+          <span class="menu-size">16" · Messy guaranteed</span>
+        </div>
+      </div>
+
+      <div class="menu-item fade-in">
+        <span class="menu-tag">Exotic</span>
+        <h3 class="menu-name">The Spreadeagle</h3>
+        <p class="menu-desc">Flatbread-style, stretched paper-thin, barely covered. Olive oil base, whipped ricotta, wild honey drizzle. Delicate. Ethereal.</p>
+        <div class="menu-footer">
+          <span class="menu-price">$16.99</span>
+          <span class="menu-size">18" flatbread</span>
+        </div>
+      </div>
+
+      <div class="menu-item fade-in">
+        <span class="menu-tag">18+ Only</span>
+        <h3 class="menu-name">The Calabrian Special</h3>
+        <p class="menu-desc">Calabrian chili oil, nduja, ghost pepper honey. Not for the faint of heart. She's given several old-timers heart attacks but they keep coming.</p>
+        <div class="menu-footer">
+          <span class="menu-price">$24.99</span>
+          <span class="menu-size">14" · Adults only</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="checker"></div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">Our story</p>
+      <h2 class="section-title">THE ESTABLISHMENT</h2>
+      <span class="ornament">✦ ✦ ✦</span>
+    </div>
+    <div class="about-grid">
+      <div class="about-text fade-in">
+        <p>Family-owned since 1987, <strong>Garlic Thots</strong> has been Chicagoland's worst-kept secret — and its most beloved destination. Pizza, sure. But we put on a <em>SHOW</em>.</p>
+        <p>Every pie is hand-tossed by our world-class performers, or <em>pizzaiolos</em>. Dough spun high in the air, fingers working the dough with a precision that will either make you wish you were them or wish you had them.</p>
+        <p>Our founder, Sal "Silky" Genovese, opened Garlic Thots after a life-changing trip to Naples where he witnessed a master pizzaiolo full-knuckle a ball of dough into something transcendent. "I want people to feel what I felt," Sal told the Chicago Tribune in 1989. "A little hot, a little hungry, and completely unable to look away."</p>
+        <p>Forty-six years later, that remains the mission statement.</p>
+      </div>
+      <div class="house-rules fade-in">
+        <h3>HOUSE RULES</h3>
+        <ul>
+          <li>No cover charge before 5 PM (kitchen opens at 3)</li>
+          <li>Two-drink minimum: fountain soda or house Chianti</li>
+          <li>Private rooms available</li>
+          <li>No photography</li>
+          <li>Give your server a big tip — they work very hard</li>
+          <li>The Calabrian Special requires valid photo ID</li>
+          <li>No outside food, unless you're sharing</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="checker"></div>
+
+<!-- ENTERTAINERS -->
+<section id="entertainers">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">The talent behind the pies</p>
+      <h2 class="section-title">MEET THE PERFORMERS</h2>
+      <span class="ornament">✦ ✦ ✦</span>
+      <p class="section-subtitle">Our staff holds a combined 94 years of professional experience in the art of the toss.</p>
+    </div>
+    <div class="entertainers-grid">
+
+      <div class="entertainer-card fade-in">
+        <div class="entertainer-avatar">🍕</div>
+        <div class="entertainer-body">
+          <h3 class="entertainer-name">Tony "The Toss" Martinelli</h3>
+          <p class="entertainer-title">Head Pizzaiolo &amp; Founder's Son</p>
+          <p class="entertainer-bio">"I was born in this kitchen. I will die in this kitchen. In between, I will spin dough so high it touches God." Third-generation Brooklyn. No formal training — only instinct and an alarming amount of eye contact with the audience.</p>
+          <span class="entertainer-specialty">Specialty: The Double Spin</span>
+        </div>
+      </div>
+
+      <div class="entertainer-card fade-in">
+        <div class="entertainer-avatar">🔥</div>
+        <div class="entertainer-body">
+          <h3 class="entertainer-name">Candi</h3>
+          <p class="entertainer-title">Fire Specialist (short for Candice)</p>
+          <p class="entertainer-bio">Joined Garlic Thots in 2011 straight out of the Culinary Institute. "They didn't teach me what I do here," she says with a smile. "This is self-taught." The crowd loves her for exactly that reason.</p>
+          <span class="entertainer-specialty">Specialty: The Flambé Finish</span>
+        </div>
+      </div>
+
+      <div class="entertainer-card fade-in">
+        <div class="entertainer-avatar">💪</div>
+        <div class="entertainer-body">
+          <h3 class="entertainer-name">Marco "The Knuckle" D'Amico</h3>
+          <p class="entertainer-title">Dough Technician</p>
+          <p class="entertainer-bio">Marco doesn't use a rolling pin. Doesn't use a machine. Only his hands, his forearms, and twenty-two years of muscle memory. Guests have requested him by name since 2004.</p>
+          <span class="entertainer-specialty">Specialty: The Long Stretch</span>
+        </div>
+      </div>
+
+      <div class="entertainer-card fade-in">
+        <div class="entertainer-avatar">🌶️</div>
+        <div class="entertainer-body">
+          <h3 class="entertainer-name">Lil' Sal</h3>
+          <p class="entertainer-title">Spice Curator &amp; Night Shift Lead</p>
+          <p class="entertainer-bio">Don't let the nickname fool you — there is nothing little about what Lil' Sal brings to the table. Oversees all heat applications including the restricted Calabrian Special. Certified. Dangerous.</p>
+          <span class="entertainer-specialty">Specialty: The Hot Drizzle</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="checker"></div>
+
+<!-- HOURS & LOCATION -->
+<section id="hours">
+  <div class="section-inner">
+    <div class="section-header fade-in">
+      <p class="section-eyebrow">Come find us</p>
+      <h2 class="section-title">HOURS &amp; LOCATION</h2>
+      <span class="ornament">✦ ✦ ✦</span>
+    </div>
+    <div class="hours-grid">
+
+      <div class="fade-in">
+        <table class="hours-table">
+          <thead>
+            <tr>
+              <th>Day</th>
+              <th>Kitchen Hours</th>
+              <th>Last Call</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="day">Monday</td><td class="closed">Closed (We Rest)</td><td class="closed">—</td></tr>
+            <tr><td class="day">Tuesday</td><td class="time">5 PM – 1 AM</td><td class="time">12:30 AM</td></tr>
+            <tr><td class="day">Wednesday</td><td class="time">5 PM – 1 AM</td><td class="time">12:30 AM</td></tr>
+            <tr><td class="day">Thursday</td><td class="time">4 PM – 2 AM</td><td class="time">1:30 AM</td></tr>
+            <tr><td class="day">Friday</td><td class="time">3 PM – 4 AM</td><td class="time">3:30 AM</td></tr>
+            <tr><td class="day">Saturday</td><td class="time">3 PM – 4 AM</td><td class="time">3:30 AM</td></tr>
+            <tr><td class="day">Sunday</td><td class="time">12 PM – 12 AM</td><td class="time">11:30 PM</td></tr>
+          </tbody>
+        </table>
+        <div class="address-block">
+          <p><strong>Address:</strong> 69 Mozzarella Ave, Chicago, IL 60601</p>
+          <p><strong>Parking:</strong> Valet available Thurs–Sat after 7 PM</p>
+          <p><strong>Reservations:</strong> Tel. 555-THOTS or walk-in welcome</p>
+        </div>
+      </div>
+
+      <div class="fade-in">
+        <div class="map-box">
+          <div class="street-labels">
+            <span style="top:26%; left:1%; transform:rotate(-90deg) translateX(-50%); transform-origin:left center; white-space:nowrap">Marinara Blvd</span>
+            <span style="top:54%; left:1%; transform:rotate(-90deg) translateX(-50%); transform-origin:left center; white-space:nowrap">Ricotta Rd</span>
+            <span style="top:4%; left:18%">Pepperoni St</span>
+            <span style="top:4%; left:48%">Basil Ave</span>
+          </div>
+          <div class="map-center">
+            <span class="map-pin">📍</span>
+            <span class="map-label">You Want To Come Here</span>
+          </div>
+        </div>
+        <p style="margin-top:0.75rem; font-family:'Oswald',sans-serif; font-size:0.74rem; letter-spacing:0.1em; color:var(--brown); text-align:center; text-transform:uppercase;">Not responsible for parking tickets. The stuff we have is barely legal anyway</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-checker"></div>
+  <div class="footer-logo">GARLIC THOTS</div>
+  <div class="footer-tagline">Pizzeria "Social" Club &bull; Chicago, IL &bull; Est. 1980</div>
+  <div class="footer-disclaimers">
+    <p>⚠ Must be 18 or older to order The Calabrian Special. No exceptions. We have heard every excuse.</p>
+    <p>⚠ Garlic Thots is a pizza restaurant. Any resemblance to other types of establishments is purely coincidental and our lawyers have reviewed this disclaimer at considerable length and expense.</p>
+    <p class="footer-copy">© 2026 Mike Fountain. All rights reserved. 69 Mozzarella Ave, Chicago IL 60601. Tel. 555-THOTS. We are not responsible for the walk of shame or soiled clothes.</p>
+  </div>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  document.querySelectorAll('.menu-item').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.06}s`;
+  });
+  document.querySelectorAll('.entertainer-card').forEach((el, i) => {
+    el.style.transitionDelay = `${i * 0.09}s`;
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+
+</body>
+</html>
