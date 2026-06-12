@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Garlic Thots — Pizzeria Strip Club, Brooklyn NY</title>
-  <meta name="description" content="Brooklyn's Most Sensational Pizzeria Strip Club. Hot &amp; Oily. Home of the Thick Slice. Dine In · Eat Out · Tip Well. 69 Mozzarella Ave, Brooklyn NY.">
+  <title>Garlic Thots — Pizzeria &quot;Social&quot; Club, Chicago IL</title>
+  <meta name="description" content="Chicago's Most Sensational Pizzeria &quot;Social&quot; Club. Hot &amp; Oily. Home of the Thick Slice. Dine In · Eat Out · Tip Well. 69 Mozzarella Ave, Chicago IL.">
   <link rel="canonical" href="https://garlic-thots.vercel.app/">
   <meta name="theme-color" content="#C41E3A">
 
@@ -20,20 +20,20 @@
   <meta property="og:url" content="https://garlic-thots.vercel.app/">
   <meta property="og:site_name" content="Garlic Thots">
   <meta property="og:locale" content="en_US">
-  <meta property="og:title" content="Garlic Thots — Pizzeria Strip Club">
-  <meta property="og:description" content="Brooklyn's Most Sensational Pizza Strip Joint. Hot &amp; Oily. Home of the Thick Slice. Dine In · Eat Out · Tip Well.">
+  <meta property="og:title" content="Garlic Thots — Pizzeria &quot;Social&quot; Club">
+  <meta property="og:description" content="Chicago's Most Sensational Pizza &quot;Social&quot; Joint. Hot &amp; Oily. Home of the Thick Slice. Dine In · Eat Out · Tip Well.">
   <meta property="og:image" content="https://garlic-thots.vercel.app/og-image.png">
   <meta property="og:image:type" content="image/png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Garlic Thots — Pizzeria Strip Club. Brooklyn NY. Hot &amp; Oily. Home of the Thick Slice.">
+  <meta property="og:image:alt" content="Garlic Thots — Pizzeria &quot;Social&quot; Club. Chicago IL. Hot &amp; Oily. Home of the Thick Slice.">
 
   <!-- Twitter / X -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Garlic Thots — Pizzeria Strip Club">
-  <meta name="twitter:description" content="Brooklyn's Most Sensational Pizza Strip Joint. Hot &amp; Oily. Home of the Thick Slice. Dine In · Eat Out · Tip Well.">
+  <meta name="twitter:title" content="Garlic Thots — Pizzeria &quot;Social&quot; Club">
+  <meta name="twitter:description" content="Chicago's Most Sensational Pizza &quot;Social&quot; Joint. Hot &amp; Oily. Home of the Thick Slice. Dine In · Eat Out · Tip Well.">
   <meta name="twitter:image" content="https://garlic-thots.vercel.app/og-image.png">
-  <meta name="twitter:image:alt" content="Garlic Thots — Pizzeria Strip Club. Brooklyn NY.">
+  <meta name="twitter:image:alt" content="Garlic Thots — Pizzeria &quot;Social&quot; Club. Chicago IL.">
 
   <!-- Structured data -->
   <script type="application/ld+json">
@@ -41,15 +41,15 @@
     "@context": "https://schema.org",
     "@type": "Restaurant",
     "name": "Garlic Thots",
-    "description": "Brooklyn's Most Sensational Pizzeria Strip Club. Hot & Oily. Home of the Thick Slice.",
+    "description": "Chicago's Most Sensational Pizzeria \"Social\" Club. Hot & Oily. Home of the Thick Slice.",
     "url": "https://garlic-thots.vercel.app/",
     "telephone": "555-THOTS",
     "servesCuisine": "Pizza",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "69 Mozzarella Ave",
-      "addressLocality": "Brooklyn",
-      "addressRegion": "NY",
+      "addressLocality": "Chicago",
+      "addressRegion": "IL",
       "postalCode": "11201",
       "addressCountry": "US"
     },
@@ -146,6 +146,29 @@
       transition: background 0.15s, color 0.15s;
     }
     nav ul li a:hover { background: var(--red-dark); color: #FFD700; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 26px;
+      height: 18px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+    .nav-toggle span {
+      display: block;
+      height: 3px;
+      background: white;
+      border-radius: 1px;
+      transform-origin: center;
+      transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7.5px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7.5px) rotate(-45deg); }
 
     /* ===== HERO ===== */
     .hero {
@@ -708,7 +731,22 @@
         width: 160px;
         order: -1;
       }
-      nav ul { display: none; }
+      .nav-toggle { display: flex; }
+      nav ul {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--red-dark);
+        border-bottom: 4px solid #5a0010;
+        box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      }
+      nav ul.open { display: flex; }
+      nav ul li { border-bottom: 1px solid rgba(255,255,255,0.12); }
+      nav ul li:last-child { border-bottom: none; }
+      nav ul li a { padding: 1.1rem 2rem; font-size: 0.9rem; }
       .about-grid, .hours-grid { grid-template-columns: 1fr; }
       .menu-grid { grid-template-columns: 1fr; }
       .entertainers-grid { grid-template-columns: repeat(2, 1fr); }
@@ -724,6 +762,9 @@
 <!-- NAV -->
 <nav>
   <a href="#" class="nav-logo">Garlic <span>Thots</span></a>
+  <button class="nav-toggle" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
   <ul>
     <li><a href="#menu">Menu</a></li>
     <li><a href="#about">About</a></li>
@@ -754,7 +795,7 @@
           <span class="hero-flank">HOME OF THE<br>THICK SLICE</span>
         </div>
 
-        <p class="hero-tagline">Pizzeria Strip Club</p>
+        <p class="hero-tagline">Pizzeria &ldquo;Social&rdquo; Club</p>
         <div class="hero-badge">OPEN NIGHTLY</div>
         <div class="hero-info">
           <p>69 Mozzarella Ave &bull; Chicago, IL 60601</p>
@@ -924,7 +965,7 @@
         <div class="entertainer-body">
           <h3 class="entertainer-name">Tony "The Toss" Martinelli</h3>
           <p class="entertainer-title">Head Pizzaiolo &amp; Founder's Son</p>
-          <p class="entertainer-bio">"I was born in this kitchen. I will die in this kitchen. In between, I will spin dough so high it touches God." Third-generation Brooklyn. No formal training — only instinct and an alarming amount of eye contact with the audience.</p>
+          <p class="entertainer-bio">"I was born in this kitchen. I will die in this kitchen. In between, I will spin dough so high it touches God." Third-generation Chicago. No formal training — only instinct and an alarming amount of eye contact with the audience.</p>
           <span class="entertainer-specialty">Specialty: The Double Spin</span>
         </div>
       </div>
@@ -1049,8 +1090,19 @@
     el.style.transitionDelay = `${i * 0.09}s`;
   });
 
+  const navToggle = document.querySelector('.nav-toggle');
+  const navUl = document.querySelector('nav ul');
+  navToggle.addEventListener('click', () => {
+    const open = navUl.classList.toggle('open');
+    navToggle.classList.toggle('open', open);
+    navToggle.setAttribute('aria-expanded', open);
+  });
+
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
+      navUl.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
       const target = document.querySelector(link.getAttribute('href'));
       if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
     });
